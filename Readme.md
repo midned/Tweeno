@@ -6,7 +6,7 @@ It includes Robert Penner's easing functions and allows to use custom easing fun
 
 ## Documentation
 
-The code is documented used Doxygen, in a near future it may be added some examples besides the API documentation page (like usage within SDL2)
+(The code is documented using Doxygen)[http://alv-c.github.io/Tweeno/html/], in a near future it may be added some examples besides the API documentation page (like usage within SDL2)
 
 ## Instalaltion
 
