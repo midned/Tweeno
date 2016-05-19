@@ -15,7 +15,7 @@ This library now uses GYP so its easier for you to add it to your existing proje
 Just add the following lines to your `.gyp` file
 
 ```json
-'dependencies' [
+'dependencies': [
   './path/to/tweeno.gyp:tweeno'
 ]
 ```
