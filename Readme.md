@@ -4,20 +4,26 @@ Tweeno is a simple tweening library for C++11. It's inspired by TweenLite (in a 
 
 It includes Robert Penner's easing functions and allows to use custom easing functions if wanted.
 
-## Documentation
+## Usage
 
-[The code is documented using Doxygen](http://alv-c.github.io/Tweeno/html/), in a near future it may be added some examples besides the API documentation page (like usage within SDL2)
+[The code is documented using Doxygen with a few examples](http://alv-c.github.io/Tweeno/html/).
 
-## Instalaltion
+## Installation
 
-It has to be compiled within the program you are writing.
+This library now uses GYP so its easier for you to add it to your existing project
 
-The `Tweeno/headers` folder must be added to the default includes `-iTweeno/headers` and all `.cpp` files inside `Tweeno/src` must be compiled.
+Just add the following lines to your `.gyp` file
 
-All `.cpp` files inside `Tweeno/src/Easing` can be compiled but it will take some unnecessary extra time so you can specify to compile only the ones you are using. If you only use `Tweeno::Easing::Bounce` easing then you need only to compile `Tweeno/src/Easing/Bounce.cpp` file
+```json
+'dependencies' [
+  './path/to/tweeno.gyp:tweeno'
+]
+```
+
+To use other easing functions add the location of the `.cpp` file in `tweeno.gyp` file
+
+Those instructions are already explained as comments at `tweeno.gyp`
 
 ## License
 
 MIT License
-
-
