@@ -1,8 +1,8 @@
-# Tweeno - Simple C++11 tweening library
+# Tweeno - Tweening library for C++
 
-Tweeno is a simple tweening library for C++11. It's inspired by TweenLite (in a future may be added a TimeLine-like feature to it)
+Tweeno is a tweening library for C++*(11)* inspired by TweenLite
 
-It includes Robert Penner's easing functions and allows to use custom easing functions if wanted.
+It includes Robert Penner's easing functions and allows to use custom easing functions if wanted to.
 
 ## Usage
 
@@ -10,19 +10,27 @@ It includes Robert Penner's easing functions and allows to use custom easing fun
 
 ## Installation
 
-This library now uses GYP so its easier for you to add it to your existing project
+This library uses GYP.
 
-Just add the following lines to your `.gyp` file
+Just add it to `dependencies` list inside your `.gyp` file
 
-```json
+```python
 'dependencies': [
-  './path/to/tweeno.gyp:tweeno'
+  './path/to/Tweeno/tweeno.gyp:tweeno'
 ]
 ```
 
-To use other easing functions add the location of the `.cpp` file in `tweeno.gyp` file
+By default, only `Linear` easing is compiled. To use another easing functions you need to add its `.cpp` location at your `.gyp` file `sources`.
 
-Those instructions are already explained as comments at `tweeno.gyp`
+Example.
+
+```python
+# To use other easing functions add .cpp files here
+'sources': [
+        # (...) Your suctom source files
+        'path/to/Tweeno/Easing/Bounce.cpp',
+],
+```
 
 ## License
 
