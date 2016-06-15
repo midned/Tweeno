@@ -27,7 +27,7 @@ Example.
 ```python
 # To use other easing functions add .cpp files here
 'sources': [
-        # (...) Your suctom source files
+        # (...) Your custom source files
         'path/to/Tweeno/Easing/Bounce.cpp',
 ],
 ```
