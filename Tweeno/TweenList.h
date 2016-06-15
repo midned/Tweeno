@@ -1,9 +1,9 @@
 
 #pragma once
 
-#include "Repeat.h"
-#include "Tween.h"
-#include "Easing/Type.h"
+#include "Tweeno/Repeat.h"
+#include "Tweeno/Tween.h"
+#include "Tweeno/Easing/Type.h"
 
 #include <map>
 #include <functional>
@@ -28,10 +28,10 @@ public:
 
 	TweenList* easing(easing_function fn);
 	TweenList* easing_back(easing_function fn);
-	
+
 	TweenList* repeat(Repeat r);
 	TweenList* repeat_delay(float seconds);
-	
+
 	TweenList* set_duration(float duration);
 	float get_duration();
 

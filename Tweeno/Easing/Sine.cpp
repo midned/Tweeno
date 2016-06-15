@@ -1,7 +1,7 @@
 
-#include "Easing/Sine.h"
+#include "Tweeno/Easing/Sine.h"
 
-#include "Easing/Type.h"
+#include "Tweeno/Easing/Type.h"
 
 #include <math.h>
 
@@ -13,8 +13,8 @@ easing_function Sine::easeIn = [](float t,float b , float c, float d) {
 	return -c * cos(t/d * (PI/2)) + c + b;
 };
 
-easing_function Sine::easeOut = [](float t,float b , float c, float d) {	
-	return c * sin(t/d * (PI/2)) + b;	
+easing_function Sine::easeOut = [](float t,float b , float c, float d) {
+	return c * sin(t/d * (PI/2)) + b;
 };
 
 easing_function Sine::easeInOut = [](float t,float b , float c, float d) {

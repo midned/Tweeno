@@ -1,7 +1,7 @@
 
-#include "Easing/Circ.h"
+#include "Tweeno/Easing/Circ.h"
 
-#include "Easing/Type.h"
+#include "Tweeno/Easing/Type.h"
 
 #include <math.h>
 

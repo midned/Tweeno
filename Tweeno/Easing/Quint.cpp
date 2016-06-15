@@ -1,7 +1,7 @@
 
-#include "Easing/Quint.h"
+#include "Tweeno/Easing/Quint.h"
 
-#include "Easing/Type.h"
+#include "Tweeno/Easing/Type.h"
 
 namespace Tweeno {
 

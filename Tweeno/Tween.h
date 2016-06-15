@@ -1,9 +1,9 @@
 
 #pragma once
 
-#include "TweenList.h"
-#include "Repeat.h"
-#include "Easing/Type.h"
+#include "Tweeno/TweenList.h"
+#include "Tweeno/Repeat.h"
+#include "Tweeno/Easing/Type.h"
 
 #include <functional>
 
@@ -32,7 +32,7 @@ public:
 
 	Tween* set_duration(float seconds);
 	float get_duration();
-	
+
 	Tween* seek(float seconds);
 	float current_time();
 
@@ -54,7 +54,7 @@ public:
 
 	float get_timescale();
 	Tween* set_timescale(float t);
-	
+
 	void on_update(std::function<void (float)> callback);
 	void on_complete(std::function<void ()> callback);
 private:

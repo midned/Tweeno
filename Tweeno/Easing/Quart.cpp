@@ -1,7 +1,7 @@
 
-#include "Easing/Quart.h"
+#include "Tweeno/Easing/Quart.h"
 
-#include "Easing/Type.h"
+#include "Tweeno/Easing/Type.h"
 
 namespace Tweeno {
 

@@ -4,7 +4,7 @@
 namespace Tweeno {
 
 enum Repeat {
-	NONE, LOOP, YOYO
+    NONE, YOYO, LOOP
 };
 
 }

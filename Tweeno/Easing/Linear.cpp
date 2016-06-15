@@ -1,7 +1,7 @@
 
-#include "Easing/Linear.h"
+#include "Tweeno/Easing/Linear.h"
 
-#include "Easing/Type.h"
+#include "Tweeno/Easing/Type.h"
 
 namespace Tweeno {
 
@@ -15,7 +15,7 @@ easing_function Linear::easeIn = [](float t,float b , float c, float d) {
 	return c*t/d + b;
 };
 
-easing_function Linear::easeOut = [](float t,float b , float c, float d) {	
+easing_function Linear::easeOut = [](float t,float b , float c, float d) {
 	return c*t/d + b;
 };
 

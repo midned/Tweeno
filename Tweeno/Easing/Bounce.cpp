@@ -1,7 +1,7 @@
 
-#include "Easing/Bounce.h"
+#include "Tweeno/Easing/Bounce.h"
 
-#include "Easing/Type.h"
+#include "Tweeno/Easing/Type.h"
 
 namespace Tweeno {
 

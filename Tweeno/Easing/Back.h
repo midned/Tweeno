@@ -1,19 +1,20 @@
 
 #pragma once
 
-#include "Easing/Type.h"
+#include "Tweeno/Easing/Type.h"
 
 namespace Tweeno {
 
 namespace Easing {
 
-class Circ {
-	
+class Back {
+
 	public:
-		
+
 		static easing_function easeIn;
 		static easing_function easeOut;
 		static easing_function easeInOut;
+
 };
 
 }

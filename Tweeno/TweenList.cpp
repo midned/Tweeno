@@ -1,9 +1,9 @@
 
-#include "TweenList.h"
-#include "Repeat.h"
-#include "Easing/Type.h"
-#include "Easing/Linear.h"
-#include "Tween.h"
+#include "Tweeno/TweenList.h"
+#include "Tweeno/Repeat.h"
+#include "Tweeno/Easing/Type.h"
+#include "Tweeno/Easing/Linear.h"
+#include "Tweeno/Tween.h"
 
 #include <iostream>
 #include <tuple>
@@ -29,10 +29,10 @@ void TweenList::apply_defaults(Tween* t) {
 }
 
 /**
- * @brief Create a new tween list 
- * 
+ * @brief Create a new tween list
+ *
  * @details Tween list are used to have multiple tweens grouped with same properties, updating variables at the same time.
- * 
+ *
  */
 TweenList::TweenList(): _default_timescale(1.f), _default_duration(0), _default_easing(Easing::Linear::easeNone), _default_repeat_delay(0), _default_repeat(Repeat::NONE) {
 
@@ -45,7 +45,7 @@ TweenList::~TweenList() {
 /**
  * @brief Add a new tween
  * @details Creates a new tween with empty values and return it so we can set them
- * 
+ *
  * @return The created tween object
  */
 Tween* TweenList::add() {
@@ -55,10 +55,10 @@ Tween* TweenList::add() {
 /**
  * @brief Add a new tween
  * @details Creates a new tween using values
- * 
+ *
  * @param from The initial value of the tween
  * @param to The end value of the tween
- * 
+ *
  * @return The created tween object
  */
 Tween* TweenList::add(float from, float to) {
@@ -68,7 +68,7 @@ Tween* TweenList::add(float from, float to) {
 /**
  * @brief Add a new tween
  * @details Creates a new tween and adds it to the list by using an identifier that we can use in TweenList::on_update()
- * 
+ *
  * @param tween_name The identifier of the tween
  * @return The created tween object
  */
@@ -79,7 +79,7 @@ Tween* TweenList::add(const char* tween_name) {
 /**
  * @brief Add a new tween
  * @details Creates a new tween with the specified identifier and initial/end values
- * 
+ *
  * @param tween_name The identifier of the tween
  * @param from The initial value of the tween
  * @param to The end value of the tween
@@ -116,7 +116,7 @@ void TweenList::invert() {
 /**
  * @brief Update all the tweens
  * @details Update all the tweens with the given delta time
- * 
+ *
  * @param delta Elapsed time in seconds (float)
  */
 void TweenList::update(float delta) {
@@ -130,7 +130,7 @@ void TweenList::update(float delta) {
 
 /**
  * @brief Set the easing function of all tweens
- * 
+ *
  * @param fn The easing function (can be created manually, see Tween::easing() )
  * @return The actual tweenlist, for method chaining
  */
@@ -145,7 +145,7 @@ TweenList* TweenList::easing(easing_function fn) {
 
 /**
  * @brief Set the easing function for when the tweens go back
- * 
+ *
  * @param fn The easing function (can be created manually, see Tween::easing_back() )
  * @return The actual tweenlist, for method chaining
  */
@@ -160,12 +160,12 @@ TweenList* TweenList::easing_back(easing_function fn) {
 
 /**
  * @brief Set the repeat type
- * 
+ *
  * @param r - The repeat type
  * - Tweeno::Repeat::NONE to not repeat
  * - Tweeno::Repeat::LOOP to repeat
  * - Tweeno::Repeat::YOYO to repeat back and forward
- * 
+ *
  * @return The actual tweenlist, for method chaining
  */
 TweenList* TweenList::repeat(Repeat r) {
@@ -179,7 +179,7 @@ TweenList* TweenList::repeat(Repeat r) {
 
 /**
  * @brief Set delay time to wait until all the tweens repeat
- * 
+ *
  * @param seconds Time to wait, in seconds
  * @return The actual tweenlist, for method chaining
  */
@@ -194,7 +194,7 @@ TweenList* TweenList::repeat_delay(float seconds) {
 
 /**
  * @brief Set the duration of all the tweens
- * 
+ *
  * @param seconds The duration, in seconds
  * @return The actual tweenlist, for method chaining
  */
@@ -210,7 +210,7 @@ TweenList* TweenList::set_duration(float duration) {
 /**
  * @brief Get the duration of all the tweens
  * @details Get the default duration used when adding a new tween to the list
- * 
+ *
  * @return The duration
  */
 float TweenList::get_duration() {
@@ -219,7 +219,7 @@ float TweenList::get_duration() {
 
 /**
  * @brief Set the current time of all the tweens
- * 
+ *
  * @param seconds The current time to be set
  * @return The actual tweenlist, for method chaining
  */
@@ -234,8 +234,8 @@ TweenList* TweenList::seek(float seconds) {
 /**
  * @brief Get the current time of the tweens
  * @details Get the current time of the tweens, using the first one as actually all of them are updated at the same time
- * 
- * @return The current time (float), in seconds 
+ *
+ * @return The current time (float), in seconds
  */
 float TweenList::current_time() {
 	if (tweens.empty()) {
@@ -247,7 +247,7 @@ float TweenList::current_time() {
 /**
  * @brief Check if all tweens are already finished
  * @details Check if all tweens are already finished, using the first one as actually all of them are supposed to end at the same time
- * 
+ *
  * @return True if already finished, false otherwise
  */
 bool TweenList::is_finished() {
@@ -292,7 +292,7 @@ bool TweenList::is_paused() {
 	if (tweens.empty()) {
 		return true;
 	}
-	
+
 	return (*tweens.begin()).second->is_paused();
 }
 
@@ -310,7 +310,7 @@ float TweenList::get_progress() {
 
 /**
  * @brief Set the progress of all the tweens
- * 
+ *
  * @param progress The progress, going from 0.f to 1.f
  * @return The actual tweenlist, for method chaining
  */
@@ -324,7 +324,7 @@ TweenList* TweenList::set_progress(float progress) {
 
 /**
  * @brief Get the time scale
- * 
+ *
  * @return The time scale set
  */
 float TweenList::get_timescale() {
@@ -334,7 +334,7 @@ float TweenList::get_timescale() {
 /**
  * @brief Set the time scale of all tweens (default 1)
  * @details The time scale modifies the delta time passed to Tween::update(dt), making dt = dt*timescale
- * 
+ *
  * @param t The time scale to be set
  * @return The actual tweenlist, for method chaining
  */
@@ -350,18 +350,18 @@ TweenList* TweenList::set_timescale(float t) {
 /**
  * @brief Set the update callback
  * @details Set the callback to be called on each update, it will be passed the std::map containing all the tweens, so one could get any value of any tween
- * 
+ *
  * @code
  * using namespace Tweeno;
  * TweenList* tweens = new TweenList();
- * 
+ *
  * tweens->add("x")->from(0)->to(150);
- * 
+ *
  * tweens->on_update([](TweenList::list_type& tweens) {
  * 		float value = tweens["x"]->value();
  * });
  * @endcode
- * 
+ *
  * @param callback The callback
  */
 void TweenList::on_update(std::function<void (list_type&)> callback) {
@@ -371,7 +371,7 @@ void TweenList::on_update(std::function<void (list_type&)> callback) {
 /**
  * @brief Set the complete callback
  * @details Set the callback to be called when all tweens are completed (actually set the on_complete callback on the last tween, so it will be called when actually all of them are complete)
- * 
+ *
  * @param callback The callback
  */
 void TweenList::on_complete(std::function<void ()> callback) {

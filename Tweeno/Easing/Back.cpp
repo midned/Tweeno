@@ -1,7 +1,7 @@
 
-#include "Easing/Back.h"
+#include "Tweeno/Easing/Back.h"
 
-#include "Easing/Type.h"
+#include "Tweeno/Easing/Type.h"
 
 namespace Tweeno {
 
@@ -13,7 +13,7 @@ easing_function Back::easeIn = [](float t,float b , float c, float d) {
 	return c*(postFix)*t*((s+1)*t - s) + b;
 };
 
-easing_function Back::easeOut = [](float t,float b , float c, float d) {	
+easing_function Back::easeOut = [](float t,float b , float c, float d) {
 	float s = 1.70158f;
 	return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
 };
