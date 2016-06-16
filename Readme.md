@@ -2,7 +2,7 @@
 
 Tweeno is a tweening library for C++*(11)* inspired by TweenLite
 
-It includes Robert Penner's easing functions and allows to use custom easing functions if wanted to.
+It includes Robert Penner's easing functions and it allows to use your own easing functions if wanted to.
 
 ## Usage
 
@@ -10,7 +10,7 @@ It includes Robert Penner's easing functions and allows to use custom easing fun
 
 ## Installation
 
-This library uses GYP.
+This library uses [GYP](https://gyp.gsrc.io).
 
 Just add it to `dependencies` list inside your `.gyp` file
 
@@ -29,6 +29,8 @@ Example.
 'sources': [
         # (...) Your custom source files
         'path/to/Tweeno/Easing/Bounce.cpp',
+	# And/or other easing functions like
+	# Quad.cpp, Sine.cpp, etc.
 ],
 ```
 
