@@ -29,8 +29,8 @@ Example.
 'sources': [
         # (...) Your custom source files
         'path/to/Tweeno/Easing/Bounce.cpp',
-	# And/or other easing functions like
-	# Quad.cpp, Sine.cpp, etc.
+		# And/or other easing functions like
+		# Quad.cpp, Sine.cpp, etc.
 ],
 ```
 
