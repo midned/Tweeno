@@ -15,7 +15,7 @@ class Tween {
 public:
 	Tween(float from, float to);
 	Tween();
-	~Tween();
+	~Tween() = default;
 
 	void start();
 	void invert();

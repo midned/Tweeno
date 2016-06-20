@@ -30,10 +30,6 @@ Tween::Tween()  {
 	Tween(0, 0);
 }
 
-Tween::~Tween() {
-
-}
-
 /**
  * @brief Set the tween to it initial values
  * @details Restarts the tween
