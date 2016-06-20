@@ -19,15 +19,15 @@ namespace Tweeno {
  * @param to End value of the tween
  */
 Tween::Tween(float from, float to): _start_value(from), _current_value(from), _end_value(to), _duration(0), _timescale(1.f), _f_target(nullptr), _i_target(nullptr), _easing(Easing::Linear::easeNone), _repeat(Repeat::NONE) {
-	_paused = true;
+	start();
 }
 
 /**
  * @brief Create a tween without values
  * @details Create a new tween with empty values that may be set later
  */
-Tween::Tween()  {
-	Tween(0, 0);
+Tween::Tween(): _start_value(0), _current_value(0), _end_value(0), _duration(0), _timescale(1.f), _f_target(nullptr), _i_target(nullptr), _easing(Easing::Linear::easeNone), _repeat(Repeat::NONE)  {
+	start();
 }
 
 /**
@@ -125,6 +125,7 @@ void Tween::update(float delta) {
  */
 Tween* Tween::from(float from) {
 	_start_value = from;
+	_current_value = _start_value;
 
 	return this;
 }
