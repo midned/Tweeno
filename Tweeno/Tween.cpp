@@ -66,57 +66,58 @@ void Tween::invert() {
  * @param delta The delta time to update in seconds
  */
 void Tween::update(float delta) {
-	// do not update if tween is _paused
-	if (is_paused()) {
+	// Do not update if tween is paused or already finished
+	if (is_paused() || is_finished()) {
 		return;
 	}
-	// or already finished
-	if ( ! is_finished()) {
-		_current_time = _current_time+delta*_timescale;
+	// see Tween::set_timescale()
+	_current_time = _current_time+delta*_timescale;
 
-		if (is_finished()) {
-            if (_repeat != Repeat::NONE) {
-        		// wait the delay to repeat
-        		if (_repeat_delay_elapsed < _repeat_delay) {
-        			_repeat_delay_elapsed += delta*_timescale;
-        		}
-        		// when delay time is reached
-        		else {
-        			// invert values and restart
-        			if (_repeat == Repeat::YOYO) {
-        				invert();
-        				start();
-        			}
-        			// or only restart, in case of Repeat::LOOP
-        			else {
-        				start();
-        			}
-        		}
-        	}
-		}
+	// If current tween just finished
+	if (is_finished()) {
+		// and _repeat is set to YOYO or LOOP
+        if (_repeat != Repeat::NONE) {
+    		// wait the delay to repeat
+    		if (_repeat_delay_elapsed < _repeat_delay) {
+    			_repeat_delay_elapsed += delta*_timescale;
+    		}
+    		// when delay time is reached
+    		else {
+    			// Invert values and restart in case of YOYO repeat type
+    			if (_repeat == Repeat::YOYO) {
+    				invert();
+    				start();
+    			}
+    			// Only restart, in case of Repeat::LOOP
+    			else {
+    				start();
+    			}
+    		}
+    	}
+	}
 
-		_current_value = _easing(_current_time, _start_value, _end_value-_start_value, _duration);
+	// Update the tween value using the specified easing function
+	_current_value = _easing(_current_time, _start_value, _end_value-_start_value, _duration);
 
-		// if is set a target (either int or float)
-		// update it with the current value
-		if (_f_target != nullptr) {
-			*_f_target = _current_value;
-		}
-		if (_i_target != nullptr) {
-			*_i_target = _current_value;
-		}
+	// if is set a target (either int or float)
+	// update it with the current value
+	if (_f_target != nullptr) {
+		*_f_target = _current_value;
+	}
+	if (_i_target != nullptr) {
+		*_i_target = _current_value;
+	}
 
-		// if is set a function to call in each update
-		if (_on_update_callback) {
-			// call it
-			_on_update_callback(_current_value);
-		}
-		// check again if is finished so it is called once
-		// and if is set a function to call when the tween ends
-		if (is_finished() && _on_complete_callback) {
-			// call it
-			_on_complete_callback();
-		}
+	// if is set a function to call in each update
+	if (_on_update_callback) {
+		// call it
+		_on_update_callback(_current_value);
+	}
+	// check again if is finished so it is called once
+	// and if is set a function to call when the tween ends
+	if (is_finished() && _on_complete_callback) {
+		// call it
+		_on_complete_callback();
 	}
 }
 
