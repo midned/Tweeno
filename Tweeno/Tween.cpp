@@ -50,13 +50,12 @@ void Tween::start() {
  * @details Invert values of the tween, used when Tween::repeat() is set as Repeat::YOYO
  */
 void Tween::invert() {
-	float temp = _start_value;
 	_current_time = _duration-_current_time;
-	_start_value = _end_value;
-	_end_value = temp;
+
+	std::swap(_start_value, _end_value);
 
 	if (_easing_back) {
-		swap(_easing_back, _easing);
+		std::swap(_easing_back, _easing);
 	}
 }
 
