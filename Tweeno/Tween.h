@@ -38,6 +38,7 @@ public:
 
 	bool is_finished();
 	bool is_completed();
+	bool is_running();
 
 	Tween* target(float* target);
 	Tween* target(int* target);

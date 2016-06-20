@@ -272,6 +272,15 @@ bool Tween::is_completed() {
 }
 
 /**
+ * @brief Check if tween is still running
+ *
+ * @return True if tween is running, false otherwise
+ */
+bool Tween::is_running() {
+	return ! is_finished();
+}
+
+/**
  * @brief Set the target float variable to update
  *
  * @code
