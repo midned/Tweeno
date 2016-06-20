@@ -18,8 +18,8 @@ namespace Tweeno {
  * @param from Initial value of the tween
  * @param to End value of the tween
  */
-Tween::Tween(float from, float to): start_value(from), current_value(from), end_value(to), duration(0), timescale(1.f), _f_target(nullptr), _i_target(nullptr), _easing(Easing::Linear::easeNone), _repeat(Repeat::NONE) {
-	paused = true;
+Tween::Tween(float from, float to): _start_value(from), _current_value(from), _end_value(to), _duration(0), _timescale(1.f), _f_target(nullptr), _i_target(nullptr), _easing(Easing::Linear::easeNone), _repeat(Repeat::NONE) {
+	_paused = true;
 }
 
 /**
@@ -39,9 +39,9 @@ Tween::~Tween() {
  * @details Restarts the tween
  */
 void Tween::start() {
-	paused = false;
+	_paused = false;
 	_current_time = 0.f;
-	current_value = start_value;
+	_current_value = _start_value;
 	_repeat_delay_elapsed = 0;
 }
 
@@ -50,10 +50,10 @@ void Tween::start() {
  * @details Invert values of the tween, used when Tween::repeat() is set as Repeat::YOYO
  */
 void Tween::invert() {
-	float temp = start_value;
-	_current_time = duration-_current_time;
-	start_value = end_value;
-	end_value = temp;
+	float temp = _start_value;
+	_current_time = _duration-_current_time;
+	_start_value = _end_value;
+	_end_value = temp;
 
 	if (_easing_back) {
 		swap(_easing_back, _easing);
@@ -67,19 +67,19 @@ void Tween::invert() {
  * @param delta The delta time to update in seconds
  */
 void Tween::update(float delta) {
-	// do not update if tween is paused
+	// do not update if tween is _paused
 	if (is_paused()) {
 		return;
 	}
 	// or already finished
 	if ( ! is_finished()) {
-		_current_time = _current_time+delta*timescale;
+		_current_time = _current_time+delta*_timescale;
 
 		if (is_finished()) {
             if (_repeat != Repeat::NONE) {
         		// wait the delay to repeat
         		if (_repeat_delay_elapsed < _repeat_delay) {
-        			_repeat_delay_elapsed += delta*timescale;
+        			_repeat_delay_elapsed += delta*_timescale;
         		}
         		// when delay time is reached
         		else {
@@ -96,27 +96,27 @@ void Tween::update(float delta) {
         	}
 		}
 
-		current_value = _easing(_current_time, start_value, end_value-start_value, duration);
+		_current_value = _easing(_current_time, _start_value, _end_value-_start_value, _duration);
 
 		// if is set a target (either int or float)
 		// update it with the current value
 		if (_f_target != nullptr) {
-			*_f_target = current_value;
+			*_f_target = _current_value;
 		}
 		if (_i_target != nullptr) {
-			*_i_target = current_value;
+			*_i_target = _current_value;
 		}
 
 		// if is set a function to call in each update
-		if (on_update_callback) {
+		if (_on_update_callback) {
 			// call it
-			on_update_callback(current_value);
+			_on_update_callback(_current_value);
 		}
 		// check again if is finished so it is called once
 		// and if is set a function to call when the tween ends
-		if (is_finished() && on_complete_callback) {
+		if (is_finished() && _on_complete_callback) {
 			// call it
-			on_complete_callback();
+			_on_complete_callback();
 		}
 	}
 }
@@ -128,7 +128,7 @@ void Tween::update(float delta) {
  * @return The tween object, for method chaining
  */
 Tween* Tween::from(float from) {
-	start_value = from;
+	_start_value = from;
 
 	return this;
 }
@@ -140,7 +140,7 @@ Tween* Tween::from(float from) {
  * @return The tween object, for method chaining
  */
 Tween* Tween::to(float to) {
-	end_value = to;
+	_end_value = to;
 
 	return this;
 }
@@ -220,18 +220,18 @@ Tween* Tween::repeat_delay(float seconds) {
  * @return The tween object, for method chaining
  */
 Tween* Tween::set_duration(float seconds) {
-	duration = seconds;
+	_duration = seconds;
 
 	return this;
 }
 
 /**
- * @brief Get the duration of the tween
+ * @brief Get the _duration of the tween
  *
- * @return The duration
+ * @return The _duration
  */
 float Tween::get_duration() {
-	return duration;
+	return _duration;
 }
 
 /**
@@ -261,7 +261,7 @@ float Tween::current_time() {
  * @return True if already finished, false otherwise
  */
 bool Tween::is_finished() {
-	return _current_time > duration;
+	return _current_time > _duration;
 }
 
 /**
@@ -319,30 +319,30 @@ Tween* Tween::target(int* target) {
  * @return The current value
  */
 float Tween::value() {
-	return current_value;
+	return _current_value;
 }
 
 /**
  * @brief Pauses the tween
  */
 void Tween::pause() {
-	paused = true;
+	_paused = true;
 }
 
 /**
  * @brief Resumes the tween
  */
 void Tween::resume() {
-	paused = false;
+	_paused = false;
 }
 
 /**
- * @brief Checks if the tween is paused
+ * @brief Checks if the tween is _paused
  *
- * @return True if is paused, false otherwise
+ * @return True if is _paused, false otherwise
  */
 bool Tween::is_paused() {
-	return paused;
+	return _paused;
 }
 
 /**
@@ -351,7 +351,7 @@ bool Tween::is_paused() {
  * @return The current progress, going from 0.f to 1.f
  */
 float Tween::get_progress() {
-	return _current_time / duration;
+	return _current_time / _duration;
 }
 
 /**
@@ -361,7 +361,7 @@ float Tween::get_progress() {
  * @return The tween object, for method chaining
  */
 Tween* Tween::set_progress(float progress) {
-	_current_time = duration*progress;
+	_current_time = _duration*progress;
 	update(0);
 	return this;
 }
@@ -372,18 +372,18 @@ Tween* Tween::set_progress(float progress) {
  * @return The time scale set
  */
 float Tween::get_timescale() {
-	return timescale;
+	return _timescale;
 }
 
 /**
  * @brief Set the time scale of the tween (default 1)
- * @details The time scale modifies the delta time passed to Tween::update(dt), making dt = dt*timescale
+ * @details The time scale modifies the delta time passed to Tween::update(dt), making dt = dt*_timescale
  *
  * @param t The time scale to be set
  * @return The tween object, for method chaining
  */
 Tween* Tween::set_timescale(float t) {
-	timescale = t;
+	_timescale = t;
 	return this;
 }
 
@@ -403,7 +403,7 @@ Tween* Tween::set_timescale(float t) {
  * @param callback The callback
  */
 void Tween::on_update(std::function<void (float)> callback) {
-	on_update_callback = callback;
+	_on_update_callback = callback;
 }
 
 /**
@@ -422,7 +422,7 @@ void Tween::on_update(std::function<void (float)> callback) {
  * @param callback The callback
  */
 void Tween::on_complete(std::function<void ()> callback) {
-	on_complete_callback = callback;
+	_on_complete_callback = callback;
 }
 
 }

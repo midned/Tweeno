@@ -59,12 +59,12 @@ public:
 	void on_update(std::function<void (float)> callback);
 	void on_complete(std::function<void ()> callback);
 private:
-	float start_value;
-	float current_value;
-	float end_value;
+	float _start_value;
+	float _current_value;
+	float _end_value;
 
-	float duration;
-	float timescale;
+	float _duration;
+	float _timescale;
 	float _current_time;
 	float* _f_target;
 	int* _i_target;
@@ -77,10 +77,10 @@ private:
 
 	Repeat _repeat;
 
-	bool paused;
+	bool _paused;
 
-	std::function<void (float)> on_update_callback;
-	std::function<void ()> on_complete_callback;
+	std::function<void (float)> _on_update_callback;
+	std::function<void ()> _on_complete_callback;
 };
 
 }
