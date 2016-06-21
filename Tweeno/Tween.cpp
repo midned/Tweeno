@@ -26,9 +26,7 @@ Tween::Tween(float from, float to): _start_value(from), _current_value(from), _e
  * @brief Create a tween without values
  * @details Create a new tween with empty values that may be set later
  */
-Tween::Tween(): _start_value(0), _current_value(0), _end_value(0), _duration(0), _timescale(1.f), _f_target(nullptr), _i_target(nullptr), _easing(Easing::Linear::easeNone), _repeat(Repeat::NONE)  {
-	start();
-}
+Tween::Tween(): Tween(0, 0) { }
 
 /**
  * @brief Set the tween to it initial values
